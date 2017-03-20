@@ -1,3 +1,7 @@
+# Personal Notes
+
+This is a fork created to store my solutions for the exercises of Sunshine project.
+
 # Sunshine!
 
 This is the repository for the weather app that students build during the [Developing Android Apps](https://www.udacity.com/course/new-android-fundamentals--ud851) course at Udacity.
