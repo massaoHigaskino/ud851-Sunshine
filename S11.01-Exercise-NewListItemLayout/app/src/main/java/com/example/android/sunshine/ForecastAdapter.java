@@ -22,6 +22,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.sunshine.utilities.SunshineDateUtils;
@@ -124,12 +125,11 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
          /* Read low temperature from the cursor (in degrees celsius) */
         double lowInCelsius = mCursor.getDouble(MainActivity.INDEX_WEATHER_MIN_TEMP);
 
-        String highAndLowTemperature =
-                SunshineWeatherUtils.formatHighLows(mContext, highInCelsius, lowInCelsius);
-
-        String weatherSummary = dateString + " - " + description + " - " + highAndLowTemperature;
-
-        forecastAdapterViewHolder.weatherSummary.setText(weatherSummary);
+        forecastAdapterViewHolder.weatherIcon.setImageResource(SunshineWeatherUtils.getSmallArtResourceIdForWeatherCondition(weatherId));
+        forecastAdapterViewHolder.weatherDay.setText(dateString);
+        forecastAdapterViewHolder.weatherForecast.setText(description);
+        forecastAdapterViewHolder.maxTemp.setText(SunshineWeatherUtils.formatTemperature(mContext, highInCelsius));
+        forecastAdapterViewHolder.minTemp.setText(SunshineWeatherUtils.formatTemperature(mContext, lowInCelsius));
     }
 
     /**
@@ -164,15 +164,23 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
      */
     class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 //      TODO (4) Replace the weatherSummary TextView with individual weather detail TextViews
-        final TextView weatherSummary;
+        final TextView weatherDay;
+        final TextView weatherForecast;
+        final TextView minTemp;
+        final TextView maxTemp;
 
 //      TODO (5) Add an ImageView for the weather icon
+        final ImageView weatherIcon;
 
         ForecastAdapterViewHolder(View view) {
             super(view);
 
 //          TODO (6) Get references to all new views and delete this line
-            weatherSummary = (TextView) view.findViewById(R.id.tv_weather_data);
+            weatherDay = (TextView) view.findViewById(R.id.day_tv);
+            weatherForecast = (TextView) view.findViewById(R.id.forecast_tv);
+            minTemp = (TextView) view.findViewById(R.id.min_temp_tv);
+            maxTemp = (TextView) view.findViewById(R.id.max_temp_tv);
+            weatherIcon = (ImageView) view.findViewById(R.id.weather_icon_iv);
 
             view.setOnClickListener(this);
         }

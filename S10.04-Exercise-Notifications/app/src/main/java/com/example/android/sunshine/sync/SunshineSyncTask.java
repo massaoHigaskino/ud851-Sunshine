@@ -85,7 +85,7 @@ public class SunshineSyncTask {
                         .getEllapsedTimeSinceLastNotification(context);
 
                 boolean dayElapsed = timeSinceLastNotification > DateUtils.DAY_IN_MILLIS;
-                
+
 //              TODO (15) If more than a day have passed and notifications are enabled, notify the user
                 if(BuildConfig.DEBUG || (notificationEnabled && dayElapsed)) {
                     NotificationUtils.notifyUserOfNewWeather(context);
